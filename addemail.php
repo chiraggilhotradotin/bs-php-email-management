@@ -1,5 +1,6 @@
 <?php
 include("includes/connection.php");
+include("includes/session.php");
 if (isset($_POST['submit'])) {
     try {
         $conn->query("INSERT INTO emails (email_name,email_email) VALUES('{$_POST['email_name']}','{$_POST['email_email']}');");
