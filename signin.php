@@ -36,6 +36,10 @@
                         echo "<div class='alert alert-danger'>
                             $error
                         </div>";
+                        if(isset($_GET['signout']))
+                        echo "<div class='alert alert-success'>
+                            Signed out sucessfully.
+                        </div>";
                     ?>
                     <div>
                         <label for="admin_username">Username</label>

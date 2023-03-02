@@ -13,7 +13,10 @@ include("includes/session.php");
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
-    <table class="table">
+    <?php
+        include("includes/navbar.php");
+    ?>
+    <table class="table mt-5">
         <caption class="caption-top h2 text-center">Emails <a href="addemail.php" class="btn btn-secondary">+</a></caption>
         <tr>
             <th>S. No.</th>
