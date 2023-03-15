@@ -8,7 +8,7 @@ include("includes/session.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emails</title>
+    <title>Deleted Emails</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
@@ -17,7 +17,7 @@ include("includes/session.php");
         include("includes/navbar.php");
     ?>
     <table class="table mt-5">
-        <caption class="caption-top h2 text-center">Emails <a href="addemail.php" class="btn btn-secondary">+</a> <a href="deletedemails.php" class="btn btn-secondary">␡</a></caption>
+        <caption class="caption-top h2 text-center">Deleted <a href="emails.php">Emails</a></caption>
         <tr>
             <th>S. No.</th>
             <th>Name</th>
@@ -25,11 +25,11 @@ include("includes/session.php");
             <th>Action</th>
         </tr>
         <?php
-            $emails = $conn->query("SELECT * FROM emails WHERE email_isdeleted=0");
+            $emails = $conn->query("SELECT * FROM emails WHERE email_isdeleted=1");
             $count = 1;
             while($email = $emails->fetch_assoc())
             {
-                echo "<tr><td>$count</td><td>{$email['email_name']}</td><td>{$email['email_email']}</td><td><a href='editemail.php?email_id={$email['email_id']}'>Edit</a> | <a href='deleteemail.php?email_id={$email['email_id']}' onclick='return confirm(\"Do you really want to delete this email?\");'>Delete</a></td></tr>";
+                echo "<tr><td>$count</td><td>{$email['email_name']}</td><td>{$email['email_email']}</td><td><a href='undeleteemail.php?email_id={$email['email_id']}'>Undelete</a></td></tr>";
                 $count++;
             }
         ?>

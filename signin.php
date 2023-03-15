@@ -36,7 +36,7 @@
                         echo "<div class='alert alert-danger'>
                             $error
                         </div>";
-                        if(isset($_GET['signout']))
+                        else if(isset($_GET['signout']))
                         echo "<div class='alert alert-success'>
                             Signed out sucessfully.
                         </div>";
@@ -50,7 +50,7 @@
                         <input type="password" name="admin_password" id="admin_password" class="form-control" required>
                     </div>
                     <div class="mt-4">
-                        <input type="submit" name="submit" class="btn btn-primary w-100">
+                        <input type="submit" value="Signin" name="submit" class="btn btn-primary w-100">
                     </div>
                 </form>
             </div>
