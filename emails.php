@@ -18,7 +18,11 @@ include("includes/session.php");
     include("includes/navbar.php");
     ?>
     <table class="table mt-5">
-        <caption class="caption-top h2 text-center">Emails <a href="addemail.php" class="btn btn-secondary">+</a> <a href="deletedemails.php" class="btn btn-secondary">␡</a></caption>
+        <caption class="caption-top h2">Emails <a href="addemail.php" class="btn btn-secondary">+</a> <a href="deletedemails.php" class="btn btn-secondary">␡</a>
+            <form class="float-end mt-2 me-2">
+                <div class="input-group"><input type="search" name="query" placeholder="Search query here." class="form-control" value="<?php echo $_GET['query'] ?? ''; ?>"><input type="submit" class="btn btn-primary" value="Search"></div>
+            </form>
+        </caption>
         <tr>
             <th>S. No.</th>
             <th>Name</th>
@@ -29,8 +33,11 @@ include("includes/session.php");
         $page = $_GET['page'] ?? 1;
         $perpage = 20;
         $skip = ($page - 1) * $perpage;
-        $emails = $conn->query("SELECT * FROM emails WHERE email_isdeleted=0 LIMIT $skip,$perpage");
-        $pages = round($conn->query("SELECT * FROM emails WHERE email_isdeleted=0")->num_rows / $perpage);
+        $searchcolumns = "";
+        if (isset($_GET['query']))
+            $searchcolumns = "AND email_name LIKE '%{$_GET['query']}%'";
+        $emails = $conn->query("SELECT * FROM emails WHERE email_isdeleted=0 $searchcolumns LIMIT $skip,$perpage");
+        $pages = round($conn->query("SELECT * FROM emails WHERE email_isdeleted=0 $searchcolumns")->num_rows / $perpage);
         $count = $skip + 1;
         while ($email = $emails->fetch_assoc()) {
             echo "<tr><td>$count</td><td>{$email['email_name']}</td><td>{$email['email_email']}</td><td><a href='editemail.php?email_id={$email['email_id']}'>Edit</a> | <a href='deleteemail.php?email_id={$email['email_id']}' onclick='return confirm(\"Do you really want to delete this email?\");'>Delete</a></td></tr>";
@@ -44,12 +51,11 @@ include("includes/session.php");
         <?php
         $start = $page - 2 > 0 ? $page - 2 : 1;
         $end = $page + 2 <= $pages ? $page + 2 : $pages;
-        if($pages > 4)
-        {
-            if($page < 3)
-                $end += (3-$page);
-            else if($page+2 > $pages)
-                $start -= ($page-$pages+2);
+        if ($pages > 4) {
+            if ($page < 3)
+                $end += (3 - $page);
+            else if ($page + 2 > $pages)
+                $start -= ($page - $pages + 2);
         }
         for ($i = $start; $i <= $end; $i++) {
         ?>
