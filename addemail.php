@@ -44,11 +44,11 @@ if (isset($_POST['submit'])) {
                     ?>
                     <div>
                         <label for="email_name">Name</label>
-                        <input type="text" name="email_name" id="email_name" required class="form-control">
+                        <input type="text" name="email_name" id="email_name" required class="form-control" value="<?php echo $_POST['email_name'] ?? ''; ?>">
                     </div>
                     <div class="mt-3">
                         <label for="email_email">Email</label>
-                        <input type="email" name="email_email" id="email_email" required class="form-control">
+                        <input type="email" name="email_email" id="email_email" required class="form-control" value="<?php echo $_POST['email_email'] ?? ''; ?>">
                     </div>
                     <div class="mt-4">
                         <input type="submit" name="submit" value="Add" class="btn btn-primary w-100">

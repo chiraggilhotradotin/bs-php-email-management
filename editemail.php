@@ -55,12 +55,12 @@ $email = $emails->fetch_assoc();
                     <div>
                         <label for="email_name">Name</label>
                         <input type="text" name="email_name" id="email_name" required
-                            value="<?php echo $email['email_name']; ?>" class="form-control">
+                            value="<?php echo $_POST['email_name'] ?? $email['email_name']; ?>" class="form-control">
                     </div>
                     <div class="mt-3">
                         <label for="email_email">Email</label>
                         <input type="email" name="email_email" id="email_email" required class="form-control"
-                            value="<?php echo $email['email_email']; ?>">
+                            value="<?php echo $_POST['email_email'] ?? $email['email_email']; ?>">
                     </div>
                     <div class="mt-4">
                         <input type="submit" name="submit" value="Update" class="btn btn-primary w-100">
